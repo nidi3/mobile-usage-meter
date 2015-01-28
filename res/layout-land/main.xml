@@ -4,27 +4,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/text"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="fkj fdskghdsfkds ddddddddfjkdsf dshjkf" />
+        android:orientation="horizontal">
 
 
-    <HorizontalScrollView android:id="@+id/scroll"
-        android:layout_width="match_parent"
-        android:layout_height="200dp">
+        <HorizontalScrollView
+            android:id="@+id/scroll"
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+
+            <ImageView
+                android:id="@+id/graph"
+                android:layout_width="500dp"
+                android:layout_height="200dp" />
+        </HorizontalScrollView>
+
         <ImageView
-            android:id="@+id/graph"
-            android:layout_width="500dp"
-            android:layout_height="200dp" />
-    </HorizontalScrollView>
+            android:id="@+id/left"
+            android:layout_width="20dp"
+            android:layout_height="160dp"/>
 
-    <TextView
-        android:id="@+id/text2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="fkj fdskghdsfkds fjkdsf dshjkf" />
+        <ImageView
+            android:id="@+id/right"
+            android:layout_width="20dp"
+            android:layout_height="160dp"
+            android:layout_gravity="end"/>
 
+    </FrameLayout>
 
 </LinearLayout>

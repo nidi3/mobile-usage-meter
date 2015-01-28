@@ -3,21 +3,19 @@ package guru.nidi.mum;
 import android.app.Activity;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
 /**
  *
  */
 class MainViews implements Views {
-    final TextView text;
-    final ImageView graph;
+    final ImageView left, graph, right;
     final HorizontalScrollView scroll;
 
     MainViews(Activity activity) {
         activity.setContentView(R.layout.main);
-        text = (TextView) activity.findViewById(R.id.text);
+        left = (ImageView) activity.findViewById(R.id.left);
         graph = (ImageView) activity.findViewById(R.id.graph);
+        right = (ImageView) activity.findViewById(R.id.right);
         scroll = (HorizontalScrollView) activity.findViewById(R.id.scroll);
     }
 }
