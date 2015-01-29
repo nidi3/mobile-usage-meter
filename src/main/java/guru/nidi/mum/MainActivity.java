@@ -8,7 +8,8 @@ import android.view.View;
 
 import java.util.Date;
 
-import static guru.nidi.mum.DateUtils.*;
+import static guru.nidi.mum.DateUtils.addDays;
+import static guru.nidi.mum.DateUtils.todayMidnight;
 
 /**
  *
@@ -49,7 +50,7 @@ public class MainActivity extends Activity {
         to = new PopupDatePicker(this, view.to, todayMidnight(), new PopupDatePicker.DateChangedListener() {
             @Override
             public Date onDateChanged(Date date) {
-                if (isAtLeastOneDayBefore(from.getDate(), date)) {
+                if (!date.before(from.getDate())) {
                     to.getDate().setTime(date.getTime());
                     setEvents();
                     return date;
@@ -62,7 +63,7 @@ public class MainActivity extends Activity {
         from = new PopupDatePicker(this, view.from, addDays(todayMidnight(), -7), new PopupDatePicker.DateChangedListener() {
             @Override
             public Date onDateChanged(Date date) {
-                if (isAtLeastOneDayBefore(date, to.getDate())) {
+                if (!date.after(to.getDate())) {
                     from.getDate().setTime(date.getTime());
                     setEvents();
                     return date;

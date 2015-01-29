@@ -163,9 +163,11 @@ public class Graphic {
         last = null;
         for (PointF point : countPoints) {
             if (last != null) {
-                graph.drawLine(last.x, getY(last.y / max), point.x, getY(point.y / max), count);
+//                graph.drawLine(last.x, getY(last.y / max), point.x, getY(point.y / max), count);
             }
             last = point;
+//            graph.drawRect(point.x - dpToPixel(5), getY(0), point.x + dpToPixel(5), getY(point.y / max), count);
+            graph.drawCircle(point.x, getY(point.y / max), dpToPixel(5), count);
         }
         right.drawLine(0, 0, 0, right.getHeight(), text);
         for (float f = 0; f < 1.1; f += .25) {
