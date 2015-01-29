@@ -1,4 +1,4 @@
-package guru.nidi.mum;
+package guru.nidi.mum.view;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -14,7 +14,7 @@ import java.util.Date;
  *
  */
 public class PopupDatePicker {
-    interface DateChangedListener {
+    public interface DateChangedListener {
         Date onDateChanged(Date date);
     }
 

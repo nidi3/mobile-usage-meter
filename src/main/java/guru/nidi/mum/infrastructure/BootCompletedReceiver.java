@@ -1,4 +1,4 @@
-package guru.nidi.mum;
+package guru.nidi.mum.infrastructure;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

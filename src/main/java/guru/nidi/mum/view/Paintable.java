@@ -1,4 +1,4 @@
-package guru.nidi.mum;
+package guru.nidi.mum.view;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

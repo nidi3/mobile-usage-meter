@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Mobile Usage Meter</string>
+    <string name="title_main">Mobile Usage Meter</string>
     <string name="text_until">until</string>
+    <string name="title_limit">Limits</string>
+    <string name="action_limits">Limits</string>
+    <string name="text_hours_per_day">Hours per day</string>
+    <string name="text_switch_on_per_day">Switch on per day</string>
+    <string name="action_save">Save</string>
 </resources>

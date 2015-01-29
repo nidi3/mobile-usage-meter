@@ -1,4 +1,4 @@
-package guru.nidi.mum;
+package guru.nidi.mum.infrastructure;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

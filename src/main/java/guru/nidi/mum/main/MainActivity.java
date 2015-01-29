@@ -1,10 +1,15 @@
-package guru.nidi.mum;
+package guru.nidi.mum.main;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.MotionEvent;
-import android.view.ScaleGestureDetector;
-import android.view.View;
+import android.view.*;
+import guru.nidi.mum.R;
+import guru.nidi.mum.infrastructure.EventPersister;
+import guru.nidi.mum.infrastructure.ListenerService;
+import guru.nidi.mum.limit.LimitActivity;
+import guru.nidi.mum.view.Graphic;
+import guru.nidi.mum.view.PopupDatePicker;
 
 import java.util.Date;
 
@@ -75,7 +80,7 @@ public class MainActivity extends Activity {
     }
 
     private void setEvents() {
-        graphic.setEvents(new Persister().getEvents(from.getDate(), addDays(to.getDate(), 1)));
+        graphic.setEvents(new EventPersister().getEvents(from.getDate(), addDays(to.getDate(), 1)));
     }
 
     @Override
@@ -99,5 +104,23 @@ public class MainActivity extends Activity {
                 return scaleDetector.isInProgress();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_limits:
+                startActivity(new Intent(this, LimitActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

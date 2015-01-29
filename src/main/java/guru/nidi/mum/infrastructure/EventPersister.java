@@ -1,4 +1,4 @@
-package guru.nidi.mum;
+package guru.nidi.mum.infrastructure;
 
 import android.content.SharedPreferences;
 import guru.nidi.android.support.AbstractPersister;
@@ -12,10 +12,10 @@ import java.util.List;
 /**
  *
  */
-public class Persister extends AbstractPersister {
+public class EventPersister extends AbstractPersister {
     private static final int LEN = 15;
 
-    public Persister() {
+    public EventPersister() {
         super("events");
     }
 

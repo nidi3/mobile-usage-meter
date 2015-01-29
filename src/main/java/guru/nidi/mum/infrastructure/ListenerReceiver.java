@@ -1,4 +1,4 @@
-package guru.nidi.mum;
+package guru.nidi.mum.infrastructure;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -8,14 +8,14 @@ import android.content.Intent;
  *
  */
 public class ListenerReceiver extends BroadcastReceiver {
-    private final Persister persister = new Persister();
+    private final EventPersister eventPersister = new EventPersister();
 
     @Override
     public void onReceive(Context context, Intent intent) {
         if ("android.intent.action.SCREEN_ON".equals(intent.getAction())) {
-            persister.addEvent(true);
+            eventPersister.addEvent(true);
         } else if ("android.intent.action.SCREEN_OFF".equals(intent.getAction())) {
-            persister.addEvent(false);
+            eventPersister.addEvent(false);
         }
     }
 }

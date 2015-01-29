@@ -1,4 +1,4 @@
-package guru.nidi.mum;
+package guru.nidi.mum.infrastructure;
 
 import android.app.Service;
 import android.content.Context;

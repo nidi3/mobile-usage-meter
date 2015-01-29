@@ -1,11 +1,14 @@
-package guru.nidi.mum;
+package guru.nidi.mum.view;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.widget.ImageView;
+import guru.nidi.mum.infrastructure.Event;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,6 +20,8 @@ import static guru.nidi.mum.DateUtils.addDays;
  *
  */
 public class Graphic {
+    private static final float TOP_BORDER = dpToPixel(5);
+
     private final Paintable left, graph, right;
 
     private float scale = 1;
@@ -118,8 +123,9 @@ public class Graphic {
                 }
 
                 final float cx = getX((current.getTime() + next.getTime()) / 2, from, pixelPerMilli);
-                sharePoints.add(new PointF(cx, 1.0f * sum / (next.getTime() - current.getTime())));
-                countPoints.add(new PointF(cx, ons));
+                final long millis = next.getTime() - current.getTime();
+                sharePoints.add(new PointF(cx, 1f * sum / millis));
+                countPoints.add(new PointF(cx, 1f * ons / millis));
 
                 drawCoord(baseY, from, pixelPerMilli, dateIterator, next);
                 current = next;
@@ -131,12 +137,6 @@ public class Graphic {
 
     private void clear(Paintable paintable) {
         paintable.drawRect(0, 0, paintable.getWidth(), paintable.getHeight(), back);
-    }
-
-    private static final float TOP_BORDER = dpToPixel(5);
-
-    private int getY(float value) {
-        return (int) ((left.getHeight() - TOP_BORDER) * (1 - value) + TOP_BORDER - 1);
     }
 
     private void drawPoints(List<PointF> sharePoints, List<PointF> countPoints) {
@@ -170,10 +170,11 @@ public class Graphic {
             graph.drawCircle(point.x, getY(point.y / max), dpToPixel(5), count);
         }
         right.drawLine(0, 0, 0, right.getHeight(), text);
+        final NumberFormat format = new DecimalFormat(max * 60 * 60 * 1000 >= 10 ? "##" : "0.#");
         for (float f = 0; f < 1.1; f += .25) {
             final int y = getY(f);
             right.drawLine(0, y, right.getWidth(), y, text);
-            right.drawText("" + (int) (max * f), 0, y + spToPixel(10), count);
+            right.drawText(format.format(max * 60 * 60 * 1000 * f) + "/h", 0, y + spToPixel(10), count);
         }
     }
 
@@ -195,6 +196,10 @@ public class Graphic {
 
     private float getX(long millis, long startMillis, float pixelPerMilli) {
         return (millis - startMillis) * pixelPerMilli;
+    }
+
+    private int getY(float value) {
+        return (int) ((left.getHeight() - TOP_BORDER) * (1 - value) + TOP_BORDER - 1);
     }
 
     private static float dpToPixel(int dp) {

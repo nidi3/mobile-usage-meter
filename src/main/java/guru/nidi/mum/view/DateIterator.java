@@ -1,4 +1,4 @@
-package guru.nidi.mum;
+package guru.nidi.mum.view;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
