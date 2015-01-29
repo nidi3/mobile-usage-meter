@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static guru.nidi.android.ApplicationContextHolder.displayMetrics;
+
 /**
  *
  */
@@ -193,15 +195,15 @@ public class Graphic {
     }
 
     private static float dpToPixel(int dp) {
-        return dp * MobileUsageMeter.displayMetrics.density;
+        return dp * displayMetrics().density;
     }
 
     private static float spToPixel(int sp) {
-        return sp * MobileUsageMeter.displayMetrics.scaledDensity;
+        return sp * displayMetrics().scaledDensity;
     }
 
     private static float pixelToSp(float pixel) {
-        return pixel / MobileUsageMeter.displayMetrics.scaledDensity;
+        return pixel / displayMetrics().scaledDensity;
     }
 
 }

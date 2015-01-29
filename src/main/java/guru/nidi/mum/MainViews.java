@@ -4,22 +4,17 @@ import android.app.Activity;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import guru.nidi.android.layout.ReflectionViews;
 
 /**
  *
  */
-class MainViews implements Views {
-    final ImageView left, graph, right;
-    final HorizontalScrollView scroll;
-    final TextView from, to;
+class MainViews extends ReflectionViews {
+    ImageView left, graph, right;
+    HorizontalScrollView scroll;
+    TextView from, to;
 
     MainViews(Activity activity) {
-        activity.setContentView(R.layout.main);
-        left = (ImageView) activity.findViewById(R.id.left);
-        graph = (ImageView) activity.findViewById(R.id.graph);
-        right = (ImageView) activity.findViewById(R.id.right);
-        scroll = (HorizontalScrollView) activity.findViewById(R.id.scroll);
-        from = (TextView) activity.findViewById(R.id.from);
-        to = (TextView) activity.findViewById(R.id.to);
+        super(activity, R.layout.main);
     }
 }
