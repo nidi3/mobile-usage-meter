@@ -1,5 +1,8 @@
 package guru.nidi.mum;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  *
  */
@@ -21,5 +24,12 @@ public class Event {
 
     public long getTo() {
         return to;
+    }
+
+    @Override
+    public String toString() {
+        final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return (from == 0 ? "" : format.format(new Date(from))) + " - " +
+                (to == 0 ? "" : format.format(new Date(to)));
     }
 }

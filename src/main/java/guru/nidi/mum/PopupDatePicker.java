@@ -8,47 +8,40 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 
 import java.text.DateFormat;
-import java.util.Calendar;
-
-import static java.util.Calendar.DAY_OF_MONTH;
-import static java.util.Calendar.MONTH;
-import static java.util.Calendar.YEAR;
+import java.util.Date;
 
 /**
  *
  */
 public class PopupDatePicker {
     interface DateChangedListener {
-        Calendar onDateChanged(Calendar calendar);
+        Date onDateChanged(Date date);
     }
 
     private final TextView input;
-    private final Calendar calendar;
+    private final Date date;
 
-    public PopupDatePicker(final Activity activity, TextView input, final Calendar calendar, final DateChangedListener dateChangedListener) {
+    public PopupDatePicker(final Activity activity, TextView input, final Date date, final DateChangedListener dateChangedListener) {
         this.input = input;
-        this.calendar = calendar;
+        this.date = date;
         showDate();
 
         input.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final boolean[] cancelled = new boolean[1];
-                final DatePickerDialog dialog = new DatePickerDialog(activity, null, calendar.get(YEAR), calendar.get(MONTH), calendar.get(DAY_OF_MONTH));
+                final DatePickerDialog dialog = new DatePickerDialog(activity, null, date.getYear() + 1900, date.getMonth(), date.getDate());
                 dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface di) {
                         if (!cancelled[0]) {
                             final DatePicker picker = dialog.getDatePicker();
-                            Calendar cal = Calendar.getInstance();
-                            cal.set(YEAR, picker.getYear());
-                            cal.set(MONTH, picker.getMonth());
-                            cal.set(DAY_OF_MONTH, picker.getDayOfMonth());
+                            Date selection = new Date(picker.getYear() - 1900, picker.getMonth(), picker.getDayOfMonth());
                             if (dateChangedListener != null) {
-                                cal = dateChangedListener.onDateChanged(cal);
+                                selection = dateChangedListener.onDateChanged(selection);
                             }
-                            if (cal != null) {
-                                calendar.setTime(cal.getTime());
+                            if (selection != null) {
+                                date.setTime(selection.getTime());
                             }
                             showDate();
                         }
@@ -65,12 +58,12 @@ public class PopupDatePicker {
         });
     }
 
-    public Calendar getCalendar() {
-        return calendar;
+    public Date getDate() {
+        return date;
     }
 
     private void showDate() {
-        input.setText(DateFormat.getDateInstance().format(calendar.getTime()));
+        input.setText(DateFormat.getDateInstance().format(date));
     }
 }
 

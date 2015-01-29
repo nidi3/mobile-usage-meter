@@ -6,9 +6,9 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 
-import java.util.Calendar;
+import java.util.Date;
 
-import static java.util.Calendar.*;
+import static guru.nidi.mum.DateUtils.*;
 
 /**
  *
@@ -46,40 +46,35 @@ public class MainActivity extends Activity {
             }
         });
 
-        final Calendar fromCal = Calendar.getInstance();
-        fromCal.set(DATE, fromCal.get(DATE) - 7);
-        from = new PopupDatePicker(this, view.from, fromCal, new PopupDatePicker.DateChangedListener() {
+        to = new PopupDatePicker(this, view.to, todayMidnight(), new PopupDatePicker.DateChangedListener() {
             @Override
-            public Calendar onDateChanged(Calendar calendar) {
-                if (isAtLeastOneDayBefore(calendar, to.getCalendar())) {
-                    from.getCalendar().setTime(calendar.getTime());
+            public Date onDateChanged(Date date) {
+                if (isAtLeastOneDayBefore(from.getDate(), date)) {
+                    to.getDate().setTime(date.getTime());
                     setEvents();
-                    return calendar;
+                    return date;
                 } else {
                     return null;
                 }
             }
         });
-        to = new PopupDatePicker(this, view.to, Calendar.getInstance(), new PopupDatePicker.DateChangedListener() {
-            @Override
-            public Calendar onDateChanged(Calendar calendar) {
-                if (isAtLeastOneDayBefore(from.getCalendar(), calendar)) {
-                    to.getCalendar().setTime(calendar.getTime());
-                    setEvents();
-                    return calendar;
-                } else {
-                    return null;
-                }
-            }
-        });
-    }
 
-    private boolean isAtLeastOneDayBefore(Calendar a, Calendar b) {
-        return a.get(YEAR) <= b.get(YEAR) && a.get(DAY_OF_YEAR) < b.get(DAY_OF_YEAR);
+        from = new PopupDatePicker(this, view.from, addDays(todayMidnight(), -7), new PopupDatePicker.DateChangedListener() {
+            @Override
+            public Date onDateChanged(Date date) {
+                if (isAtLeastOneDayBefore(date, to.getDate())) {
+                    from.getDate().setTime(date.getTime());
+                    setEvents();
+                    return date;
+                } else {
+                    return null;
+                }
+            }
+        });
     }
 
     private void setEvents() {
-        graphic.setEvents(new Persister().getEvents(from.getCalendar().getTime(), to.getCalendar().getTime()));
+        graphic.setEvents(new Persister().getEvents(from.getDate(), addDays(to.getDate(), 1)));
     }
 
     @Override

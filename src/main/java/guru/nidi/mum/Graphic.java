@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 import static guru.nidi.android.ApplicationContextHolder.displayMetrics;
+import static guru.nidi.mum.DateUtils.addDays;
 
 /**
  *
@@ -94,7 +95,7 @@ public class Graphic {
             final float pixelPerMilli = 1f * graph.getWidth() / (to - from);
             final DateIterator dateIterator = DateIterator.fromScale(1 / pixelToSp(pixelPerMilli));
 
-            Date current = new Date(from - 24 * 60 * 60 * 1000);
+            Date current = addDays(from, -1);
             int index = 0;
             final List<PointF> sharePoints = new ArrayList<>();
             final List<PointF> countPoints = new ArrayList<>();

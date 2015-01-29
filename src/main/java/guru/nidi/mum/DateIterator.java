@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import static guru.nidi.mum.DateUtils.nextWeekday;
+
 /**
 *
 */
@@ -35,14 +37,7 @@ enum DateIterator {
     WEEK("dd.MM") {
         @Override
         public Date next(Date last) {
-            final Calendar cal = Calendar.getInstance();
-            cal.set(last.getYear() + 1900, last.getMonth(), last.getDate());
-            int diff = Calendar.MONDAY - cal.get(Calendar.DAY_OF_WEEK);
-            if (diff <= 0) {
-                diff += 7;
-            }
-            cal.add(Calendar.DAY_OF_MONTH, diff);
-            return cal.getTime();
+            return nextWeekday(last, Calendar.MONDAY).getTime();
         }
     },
     MONTH("MM.yyyy") {

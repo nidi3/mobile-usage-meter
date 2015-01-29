@@ -48,8 +48,9 @@ public class Persister extends AbstractPersister {
 
         private void search() {
             String events = getEvents(key(date));
-            while (events.length() <= pos && date.getTime() < System.currentTimeMillis() + 24 * 60 * 60 * 1000) {
+            while (pos >= events.length() && date.getTime() < System.currentTimeMillis() + 24 * 60 * 60 * 1000) {
                 date.setDate(date.getDate() + 1);
+                pos = 0;
                 events = getEvents(key(date));
             }
             if (events.length() <= pos) {
