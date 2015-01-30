@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
+import guru.nidi.mum.infrastructure.Notifier;
 
 /**
  *
@@ -21,17 +22,17 @@ public class LimitActivity extends Activity {
 
         persister = new LimitPersister();
 
-        view.hoursPerDayEnabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        view.minutesPerDayEnabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                view.hoursPerDaySelect.setEnabled(isChecked);
-                view.hoursPerDayValue.setEnabled(isChecked);
+                view.minutesPerDaySelect.setEnabled(isChecked);
+                view.minutesPerDayValue.setEnabled(isChecked);
             }
         });
-        view.hoursPerDaySelect.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        view.minutesPerDaySelect.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                view.hoursPerDayValue.setText(pad(progress / 60) + ":" + pad(progress % 60));
+                view.minutesPerDayValue.setText(persister.asHours(progress));
             }
 
             @Override
@@ -65,8 +66,8 @@ public class LimitActivity extends Activity {
             }
         });
 
-        check(view.hoursPerDayEnabled, persister.isHoursPerDayEnabled());
-        view.hoursPerDaySelect.setProgress(persister.getHoursPerDay());
+        check(view.minutesPerDayEnabled, persister.isMinutesPerDayEnabled());
+        view.minutesPerDaySelect.setProgress(persister.getMinutesPerDay());
 
         check(view.switchOnPerDayEnabled, persister.isSwitchOnPerDayEnabled());
         view.switchOnPerDaySelect.setProgress(persister.getSwitchOnPerDay());
@@ -77,13 +78,11 @@ public class LimitActivity extends Activity {
         checkBox.setChecked(checked);
     }
 
-    private String pad(int value) {
-        return (value < 10 ? "0" : "") + value;
-    }
 
     public void save(View v) {
-        persister.save(view.hoursPerDayEnabled.isChecked(), view.hoursPerDaySelect.getProgress(),
+        persister.save(view.minutesPerDayEnabled.isChecked(), view.minutesPerDaySelect.getProgress(),
                 view.switchOnPerDayEnabled.isChecked(), view.switchOnPerDaySelect.getProgress());
+        Notifier.start(this);
         finish();
     }
 }

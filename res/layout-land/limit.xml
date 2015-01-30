@@ -11,7 +11,7 @@
         android:layout_marginTop="15dp">
 
         <CheckBox
-            android:id="@+id/hoursPerDayEnabled"
+            android:id="@+id/minutesPerDayEnabled"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
@@ -20,7 +20,7 @@
             android:hint="@string/text_hours_per_day" />
 
         <TextView
-            android:id="@+id/hoursPerDayValue"
+            android:id="@+id/minutesPerDayValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:textAppearanceLarge" />
@@ -28,7 +28,7 @@
     </LinearLayout>
 
     <SeekBar
-        android:id="@+id/hoursPerDaySelect"
+        android:id="@+id/minutesPerDaySelect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:max="1440"

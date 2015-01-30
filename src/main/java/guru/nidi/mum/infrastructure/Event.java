@@ -14,10 +14,6 @@ public class Event {
         this.to = to;
     }
 
-    public long duration() {
-        return to - from;
-    }
-
     public long getFrom() {
         return from;
     }

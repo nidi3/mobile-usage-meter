@@ -42,5 +42,11 @@
             </intent-filter>
         </receiver>
 
+        <receiver android:name=".infrastructure.Notifier">
+            <intent-filter>
+                <action android:name="guru.nidi.mum.infrastructure.Notifier.START"/>
+            </intent-filter>
+        </receiver>
+
     </application>
 </manifest>

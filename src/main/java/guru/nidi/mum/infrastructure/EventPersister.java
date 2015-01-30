@@ -67,6 +67,17 @@ public class EventPersister extends AbstractPersister {
         }
     }
 
+//    public List<Event> getEvents(Date date) {
+//        final String events = getEvents(key(date));
+//        final List<Event> es = new ArrayList<>();
+//        if (events.length() > 0) {
+//            if (events.charAt(0) == 'B') {
+//                es.add(new Event(0, Long.parseLong(events.substring(1, LEN + 2))));
+//            }
+//        }
+//        return es;
+//    }
+
     public List<Event> getEvents(Date from, Date to) {
         final List<Event> es = new ArrayList<>();
         final EventIterator iter = new EventIterator(from);

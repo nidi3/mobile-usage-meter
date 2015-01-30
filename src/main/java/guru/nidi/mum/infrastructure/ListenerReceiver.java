@@ -14,6 +14,7 @@ public class ListenerReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         if ("android.intent.action.SCREEN_ON".equals(intent.getAction())) {
             eventPersister.addEvent(true);
+            Notifier.start(context);
         } else if ("android.intent.action.SCREEN_OFF".equals(intent.getAction())) {
             eventPersister.addEvent(false);
         }

@@ -11,9 +11,9 @@ import guru.nidi.mum.R;
  *
  */
 class LimitViews extends ReflectionViews {
-    CheckBox hoursPerDayEnabled, switchOnPerDayEnabled;
-    TextView hoursPerDayValue, switchOnPerDayValue;
-    SeekBar hoursPerDaySelect, switchOnPerDaySelect;
+    CheckBox minutesPerDayEnabled, switchOnPerDayEnabled;
+    TextView minutesPerDayValue, switchOnPerDayValue;
+    SeekBar minutesPerDaySelect, switchOnPerDaySelect;
 
     public LimitViews(Activity activity) {
         super(activity, R.layout.limit);

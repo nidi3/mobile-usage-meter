@@ -29,10 +29,11 @@ public class Graphic {
     private List<Event> events;
     private Paint back, text, onoff, share, count;
 
-    public Graphic(ImageView left, ImageView graph, ImageView right) {
+    public Graphic(ImageView left, ImageView graph, ImageView right,float scale) {
         this.left = new Paintable(left, Bitmap.createBitmap(left.getLayoutParams().width, left.getLayoutParams().height, Bitmap.Config.ARGB_8888));
         this.graph = new Paintable(graph);
         this.right = new Paintable(right, Bitmap.createBitmap(right.getLayoutParams().width, right.getLayoutParams().height, Bitmap.Config.ARGB_8888));
+        this.scale=scale;
         initPaints();
     }
 
@@ -60,6 +61,7 @@ public class Graphic {
     }
 
     public void setSize(int width, int height) {
+        scale = Math.min(4096f / width, scale);
         if (graph.getCanvas() == null || width != this.width || graph.getWidth() != width * scale || height != graph.getHeight()) {
             this.width = width;
             this.height = height;
@@ -77,7 +79,7 @@ public class Graphic {
     }
 
     public void scale(float factor) {
-        scale = Math.min(4096f / width, Math.max(1, scale * factor));
+        scale = Math.max(1, scale * factor);
         setSize(width, height);
     }
 

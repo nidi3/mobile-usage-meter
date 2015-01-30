@@ -30,7 +30,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         view = new MainViews(this);
 
-        graphic = new Graphic(view.left, view.graph, view.right);
+        graphic = new Graphic(view.left, view.graph, view.right, 10);
 
         ListenerService.start(this);
 
