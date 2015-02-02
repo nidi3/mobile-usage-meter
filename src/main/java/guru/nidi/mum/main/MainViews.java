@@ -3,6 +3,7 @@ package guru.nidi.mum.main;
 import android.app.Activity;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import guru.nidi.android.layout.ReflectionViews;
 import guru.nidi.mum.R;
@@ -11,6 +12,7 @@ import guru.nidi.mum.R;
  *
  */
 class MainViews extends ReflectionViews {
+    LinearLayout layout;
     ImageView left, graph, right;
     HorizontalScrollView scroll;
     TextView from, to;
