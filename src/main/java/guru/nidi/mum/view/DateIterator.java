@@ -7,9 +7,15 @@ import java.util.Date;
 import static guru.nidi.mum.DateUtils.nextWeekday;
 
 /**
-*
-*/
+ *
+ */
 enum DateIterator {
+    ONE_MINUTE("HH:mm") {
+        @Override
+        public Date next(Date last) {
+            return new Date(last.getYear(), last.getMonth(), last.getDate(), last.getHours(), last.getMinutes() + 1);
+        }
+    },
     TEN_MINUTE("HH:mm") {
         @Override
         public Date next(Date last) {
@@ -59,6 +65,9 @@ enum DateIterator {
     }
 
     public static DateIterator fromScale(float milliPerSp) {
+        if (milliPerSp < 1500) {
+            return ONE_MINUTE;
+        }
         if (milliPerSp < 15000) {
             return TEN_MINUTE;
         }

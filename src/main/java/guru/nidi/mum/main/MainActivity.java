@@ -119,6 +119,9 @@ public class MainActivity extends Activity {
             case R.id.action_limits:
                 startActivity(new Intent(this, LimitActivity.class));
                 return true;
+            case R.id.action_refresh:
+                setEvents();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
